@@ -4,7 +4,7 @@ int score = 0;
 List<(int,int)> snake = new List<(int,int)> ();
 (int, int) food=(0,0);
 (int, int) dir = (0, 1);
-bool start = true;
+bool start = false;
 Random rng = new Random ();
 
 Console.SetWindowSize(width, height+2);
@@ -12,13 +12,14 @@ Console.SetBufferSize(width, height+2);
 
 snake.Add((width/2, height/2));
 
+Thread inputT = new Thread(input);
+inputT.Start();
 
-
-while(start == true)
+while(!start)
 {
     plane();
     move();
-    Thread.Sleep (1000);
+    Thread.Sleep (100);
 }
 Console.SetCursorPosition(0, height + 1);
 Console.WriteLine($"Score:{score}");
@@ -68,5 +69,38 @@ void move()
     else
     {
         snake.RemoveAt(snake.Count - 1);
+    }
+}
+
+void input()
+{
+    while (!start)
+    {
+        if (Console.KeyAvailable)
+        {
+            var key = Console.ReadKey(true).Key;
+            (int, int) newDirection = dir;
+
+            switch (key)
+            {
+                case ConsoleKey.LeftArrow:
+                    newDirection = (-1, 0);
+                    break;
+                case ConsoleKey.RightArrow:
+                    newDirection = (1, 0);
+                    break;
+                case ConsoleKey.UpArrow:
+                    newDirection = (0, -1);
+                    break;
+                case ConsoleKey.DownArrow:
+                    newDirection = (0, 1);
+                    break;
+            }
+            if ((dir.Item1 + dir.Item1 != 0) || (dir.Item2 + newDirection.Item2 != 0))
+            {
+                dir = newDirection;
+            }
+        }
+
     }
 }
