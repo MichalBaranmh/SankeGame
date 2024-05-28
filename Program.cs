@@ -2,7 +2,7 @@
 int height = 40;
 int score = 0;
 List<(int,int)> snake = new List<(int,int)> ();
-(int, int) food=(0,0);
+(int, int) food;
 (int, int) dir = (0, 1);
 bool start = false;
 Random rng = new Random ();
@@ -11,6 +11,7 @@ Console.SetWindowSize(width, height+2);
 Console.SetBufferSize(width, height+2);
 
 snake.Add((width/2, height/2));
+rngFood();
 
 Thread inputT = new Thread(input);
 inputT.Start();
@@ -65,6 +66,7 @@ void move()
     if (newHead == food)
     {
         score++;
+        rngFood();
     }
     else
     {
@@ -103,4 +105,15 @@ void input()
         }
 
     }
+}
+
+void rngFood()
+{
+    int x, y;
+    do
+    {
+        x = rng.Next(0, width);
+        y = rng.Next(0, height);
+    } while (snake.Contains((x, y)));
+    food = (x, y);
 }
