@@ -2,7 +2,7 @@
 :snake::snake::snake::snake::snake::snake::snake:
 ## Opis
 Symulator zycia weza
-:snake::snake::snake::snake::snake::snake::snake:
+
 ## Instrukcja
 
 -Strzałka w lewo kieruje weza w lewo
@@ -12,4 +12,4 @@ Symulator zycia weza
 
 ## UWAGA
 Waz jest alergikiem i je tylko X, prosze nie wjezdzac w sciany
-:snake::snake::snake::snake::snake::snake::snake:
+
